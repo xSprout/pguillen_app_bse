@@ -15,11 +15,8 @@ main();
 
 function main()
 {
-	console.log(book_directory);
-	console.log(xml_directory);
-	console.log(written_files);
-	//let fields = [];
-	//filewalker(book_directory, loopThroughEbooks);
+	let fields = [];
+	filewalker(book_directory, loopThroughEbooks);
 }
 
 function loopThroughEbooks(err, files)
