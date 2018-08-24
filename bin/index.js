@@ -45,7 +45,7 @@ function handleBook(i, file, book)
 	for ( let j = 0; j < book.flow.length; j++)
 	{
 		let chapter = book.flow[j];
-		let already_known = known_files.indexOf(path.normalize(xml_directory + folderName + "/" + chapter.id + ".xml")) >= 0 ;
+		let already_known = known_files.indexOf(path.normalize(xml_directory + "/" + folderName + "/" + chapter.id + ".xml")) >= 0 ;
 		if ( already_known ) continue;
 		setTimeout( () => { handleChapter(file, book, chapter); }, (i*500) + (j*250) );
 	}
@@ -66,12 +66,12 @@ function handleChapterText(file, book, chapter, err, txt)
 		metadata["book_" + property] = book.metadata[property];
 	}
 	metadata["book_chapter"] = chapter.id;
-	metadata["sourceFile"] = path.normalize(xml_directory + folderName + "/" + chapter.id + ".xml");
+	metadata["sourceFile"] = path.normalize(xml_directory + "/" + folderName + "/" + chapter.id + ".xml");
 
 	bookData.chapter = chapter;
 	bookData.chapterRaw = txt;
 	bookData.source = metadata["sourceFile"];
-	bookData.folder = xml_directory + folderName + "/";
+	bookData.folder = path.normalize(xml_directory + "/" + folderName + "/");
 	fs.appendFileSync(written_files, metadata["sourceFile"] + "\n");
 	q_requests.push(metadata, (err) => { });
 	q_output.push(bookData, (err) => { });
