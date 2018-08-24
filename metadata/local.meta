@@ -1,0 +1,31 @@
+[app/ui]
+version = 7.1.2
+modtime = 1534434336.920141000
+
+[app/launcher]
+version = 7.1.2
+modtime = 1534434336.922560000
+
+[indexes/ebooks]
+owner = admin
+version = 7.1.2
+modtime = 1534451349.658075000
+
+[props/epub]
+version = 7.1.2
+modtime = 1534479746.279761000
+
+[lookups/test2.csv]
+export = none
+owner = admin
+version = 7.1.2
+modtime = 1534897947.194562000
+
+[inputs/script%3A%2F%2F%24SPLUNK_HOME%2Fetc%2Fapps%2Fpguillen_app_bse%2Fbin%2Findex.sh]
+owner = admin
+version = 7.1.2
+modtime = 1534968767.474267000
+
+[inputs/batch%3A%2F%2F%2FApplications%2Fsplunk%2Fetc%2Fapps%2Fpguillen_app_bse%2F.xml_ebooks%2F...%2F%2A.xml]
+version = 7.1.2
+modtime = 1534967451.563157000
