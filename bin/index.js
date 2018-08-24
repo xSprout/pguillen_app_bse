@@ -4,9 +4,9 @@ const path = require('path');
 const async = require('async');
 const request = require('requestretry');
 let wdir = process.argv.slice(2)[0].replace(/\\/g,"/");
-let book_directory = path.normalize(wdir + "/" + "./../books/");
-let xml_directory = path.normalize(wdir + "/" + "./../.xml_ebooks/");
-let written_files = path.normalize(wdir + "/" + "./writtenFiles.txt");
+let book_directory = path.resolve(path.normalize(wdir + "/" + "./../books/"));
+let xml_directory = path.resolve(path.normalize(wdir + "/" + "./../.xml_ebooks/"));
+let written_files = path.resolve(path.normalize(wdir + "/" + "./writtenFiles.txt"));
 let q_requests = async.queue(PostMetadata,1);
 let q_output = async.queue(OutputXml,10);
 let known_files = fs.readFileSync(written_files);
@@ -15,8 +15,11 @@ main();
 
 function main()
 {
-	let fields = [];
-	filewalker(book_directory, loopThroughEbooks);
+	console.log(book_directory);
+	console.log(xml_directory);
+	console.log(written_files);
+	//let fields = [];
+	//filewalker(book_directory, loopThroughEbooks);
 }
 
 function loopThroughEbooks(err, files)
