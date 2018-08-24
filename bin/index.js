@@ -3,12 +3,13 @@ const fs = require('fs');
 const path = require('path');
 const async = require('async');
 const request = require('requestretry');
-process.chdir(process.argv.slice(2)[0]);
-let book_directory = "./../books/";
-let xml_directory = "./../.xml_ebooks/";
+let wdir = process.argv.slice(2)[0].replace(/\\/g,"/");
+let book_directory = wdir + "/" + "./../books/";
+let xml_directory = wdir + "/" + "./../.xml_ebooks/";
+let written_files = wdir + "/" + "./writtenFiles.txt";
 let q_requests = async.queue(PostMetadata,1);
 let q_output = async.queue(OutputXml,10);
-let known_files = fs.readFileSync("./writtenFiles.txt");
+let known_files = fs.readFileSync(written_files);
 
 main();
 
@@ -59,7 +60,7 @@ function handleChapterText(file, book, chapter, err, txt)
 {
 	let metadata = {};
 	let bookData = {};
-	let folderName = file.split('/').pop();
+	let folderName = file.replace(/\\/g,"/").split('/').pop();
 	for(let property in book.metadata)
 	{
 		metadata["book_" + property] = book.metadata[property];
@@ -71,7 +72,7 @@ function handleChapterText(file, book, chapter, err, txt)
 	bookData.chapterRaw = txt;
 	bookData.source = metadata["sourceFile"];
 	bookData.folder = xml_directory + folderName + "/";
-	fs.appendFileSync("./writtenFiles.txt", metadata["sourceFile"] + "\n");
+	fs.appendFileSync(written_files, metadata["sourceFile"] + "\n");
 	q_requests.push(metadata, (err) => { });
 	q_output.push(bookData, (err) => { });
 
