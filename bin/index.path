@@ -1,1 +1,1 @@
-     %SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe -command "& {set-executionpolicy Remotesigned; '$SPLUNK_HOME\etc\apps\pguillen_app_bse\bin\index.ps1'}"
+$SystemRoot\System32\WindowsPowerShell\v1.0\powershell.exe -command  " &'$SPLUNK_HOME\etc\apps\pguillen_app_bse\bin\index.ps1'"
