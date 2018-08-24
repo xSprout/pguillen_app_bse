@@ -26,7 +26,7 @@ function loopThroughEbooks(err, files)
 	let numBooks = 0;
 	for (let i = 0; i < files.length; i++) 
 	{
-		let file = files[i];
+		let file = files[i].replace(/\\/g,"/");
 		if ( file.indexOf(".epub") < 0 )
 			continue;
 		let book_file = file;
@@ -60,7 +60,7 @@ function handleChapterText(file, book, chapter, err, txt)
 {
 	let metadata = {};
 	let bookData = {};
-	let folderName = file.replace(/\\/g,"/").split('/').pop();
+	let folderName = file.split('/').pop();
 	for(let property in book.metadata)
 	{
 		metadata["book_" + property] = book.metadata[property];
